@@ -9,8 +9,11 @@ RUN apk add --no-cache git python3 make g++
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies with increased timeout to prevent network drops
+RUN npm config set fetch-retries 5 && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm install --prefer-offline --no-audit
 
 # Copy source code and config
 COPY public ./public
