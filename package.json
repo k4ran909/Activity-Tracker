@@ -34,6 +34,9 @@
     "dev": "npm run start:server",
     "postinstall": "cd client && npm install"
   },
+  "overrides": {
+    "protobufjs": "^7.5.5"
+  },
   "dependencies": {
     "@whiskeysockets/baileys": "^7.0.0-rc.9",
     "cors": "^2.8.5",

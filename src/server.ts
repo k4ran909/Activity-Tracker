@@ -11,7 +11,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import makeWASocket, { DisconnectReason, useMultiFileAuthState } from '@whiskeysockets/baileys';
+import makeWASocket, { DisconnectReason, useMultiFileAuthState, Browsers } from '@whiskeysockets/baileys';
 import { pino } from 'pino';
 import { Boom } from '@hapi/boom';
 import { WhatsAppTracker, ProbeMethod } from './tracker.js';
@@ -56,6 +56,8 @@ async function connectToWhatsApp() {
         logger: pino({ level: 'debug' }),
         markOnlineOnConnect: true,
         printQRInTerminal: false,
+        browser: Browsers.macOS('Chrome'),
+        version: [2, 3000, 1033893291],
     });
 
     sock.ev.on('connection.update', async (update: any) => {
